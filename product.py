@@ -18,13 +18,15 @@ class Product(object):
     def sell(self):
         '''This function will set all items to "sold" status
         '''
-        Product.status = 'sold'
+        self.status = 'sold'
+        return self
 
     def addTax(self, tax):
         '''This function will take a tax amount in as a param
            and return the price of the item including sales tax
         '''
-        print self.price * tax
+        print self.price * ((tax*.01)+1)
+        return self
 
     def returnitem(self, returnreason, openbox):
         '''This function takes reason for return as a parameter
@@ -39,11 +41,14 @@ class Product(object):
         if returnreason == "defective":
             self.status = "defective"
             self.price = 0
+            return self
         if openbox is False:
             self.status = "for sale"
-        elif openbox is True: 
+            return self
+        elif openbox is True:
             self.status = "used"
             self.price = self.price * .8 # 20% discount
+            return self
         #   likenew = mark for sale
         #   openbox = 20% discount and status used
 
@@ -53,16 +58,20 @@ class Product(object):
         print "====================================="
         print "== Price info for ", self.name, " =="
         print "====================================="
-        print self.price
-        print self.name
-        print self.weight
-        print self.brand
-        print self.cost
-        print self.status
-
+        print "Price: $", format(self.price, '.2f')
+        print "Product: ", self.name
+        print "Weight: ", self.weight
+        print "Brand: ", self.brand
+        print "Cost: $", format(self.cost, '.2f')
+        print "Status: ", self.status
+        return self
 
 laptop = Product(2199.99, "EliteBook", "6lbs", "HP", 1400.00)
 laptop.displayInfo()
+laptop2 = Product(3199.99, "GameBook G4", "10lbs", "HP", 2400.00)
+laptop2.displayInfo()
+laptop3 = Product(499.99, "StudentModel", "5lbs", "Dell", 310.00)
+laptop3.displayInfo()
 dockingstation = Product(199.99, "EliteDock", "2lbs", "HP", 149.00)
 dockingstation.displayInfo()
 speaker = Product(199.99, "ProAudio5.1", "8lbs", "Klipsch", 159.00)
@@ -83,9 +92,24 @@ powercable = Product(19.99, "Power Cable", "1lbs", "C2G", 10.00)
 powercable.displayInfo()
 smhdd = Product(199.99, "HDD120GB5400", "2lbs", "Seagate", 140.00)
 smhdd.displayInfo()
-lghdd = Product(299.99, "HDD120GB7200", "2lbs", "Seagate", 190.00)
+lghdd = Product(299.99, "HDD240GB7200", "2lbs", "Seagate", 190.00)
 lghdd.displayInfo()
 
+laptop.sell()
+laptop.displayInfo()
 
+laptop.returnitem("didnt want", False)
+laptop.displayInfo()
+
+laptop2.returnitem("didnt like", True)
+laptop2.displayInfo()
+
+laptop3.returnitem("defective", False)
+laptop3.displayInfo()
+
+laptop.addTax(10) #expected that you put in a whole number here, 10 = 10% for example
+
+laptop.displayInfo()
+print "Laptop Price: $", laptop.price, " and with Tax is: $", laptop.price * this.tax
 
 
