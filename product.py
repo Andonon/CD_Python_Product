@@ -25,8 +25,8 @@ class Product(object):
         '''This function will take a tax amount in as a param
            and return the price of the item including sales tax
         '''
-        print self.price * ((tax*.01)+1)
-        return self
+        priceaftertax = format(self.price * ((tax*.01)+1), '.2f')
+        print "Price after tax is", priceaftertax
 
     def returnitem(self, returnreason, openbox):
         '''This function takes reason for return as a parameter
@@ -107,9 +107,4 @@ laptop2.displayInfo()
 laptop3.returnitem("defective", False)
 laptop3.displayInfo()
 
-laptop.addTax(10) #expected that you put in a whole number here, 10 = 10% for example
-
-laptop.displayInfo()
-print "Laptop Price: $", laptop.price, " and with Tax is: $", laptop.price * this.tax
-
-
+laptop2.addTax(.10)
